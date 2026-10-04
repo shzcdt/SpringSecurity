@@ -3,9 +3,11 @@ package org.idubinov.secondSecurityApp.security;
 import org.idubinov.secondSecurityApp.models.Person;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class PersonDetails implements UserDetails {
@@ -18,7 +20,9 @@ public class PersonDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        // SHOW_ACCOUNT, WITHDRAW_MONEY
+        // ROLE_ADMIN, ROLE_USER
+        return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
     }
 
     @Override
